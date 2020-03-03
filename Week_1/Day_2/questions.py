@@ -11,9 +11,11 @@ students = [
 #             print(key, '-', some_list[i][key])
 # iteratedDictionary()
 
-
+def id(arr):
+    for i in range(len(arr)):
+        print(f"first name: {arr[i]['first_name']}, last name: {arr[i]['last_name']}")
      
-
+id(students)
 # Reverse List - Create a function that takes a list and return that list with values reversed. Do this without creating a second list. (This challenge is known to appear during basic technical interviews.)
 
 #     Example: reverse_list([37,2,1,-9]) should return [-9,1,2,37]

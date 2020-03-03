@@ -20,7 +20,7 @@ class Lecture:
     def __repr__(self):
         return f"lecture is about {self.topic} by {self.lecturer} starting at {self.start_time} at {self.location}"
     
-nadia = Person("Nadia", "N") #instance of Person class
+nadia = Person("Nadia", "N", [], "instructor") #instance of Person class
 
 # print(nadia)
 
