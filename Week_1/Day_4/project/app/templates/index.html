@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hey there {{fn}}</h1> display info
+    <p>My age is {{age}}</p>
+    <ul>
+    {% for hobbie in hobbies%}
+        {%if hobbie == 'tea'%}
+            <li>teeeee</li>
+        {%endif%}
+        <li>{{hobbie}}</li>
+    {%endfor%}
+    </ul>
+</body>
+</html>
