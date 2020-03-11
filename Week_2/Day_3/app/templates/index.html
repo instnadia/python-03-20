@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="/teachers">Show all teachers</a>
+    <ul>
+        {%for s in all_s %}
+        <li><a href="/student/{{s.id}}">{{s.name}}</a></li>
+        {%endfor%}
+    </ul>
+
+    <form action="/add_student" method="post">
+        {%csrf_token%}
+        <label for="">Name
+            <input type="text" name="name">
+        </label>
+        <label for="">Grade
+            <input type="number" name="grade">
+        </label>
+        <button>Submit</button>
+    </form>
+
+</body>
+</html>
