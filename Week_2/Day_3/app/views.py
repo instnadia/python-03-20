@@ -22,7 +22,7 @@ def add_t(request):
     return redirect("/teachers")
 
 def show_s(request,id):
-    s = Student.objects.filter(id=id) # filter is safer because if id doesnt exsit will return empty dictionary
+    s = Student.objects.filter(id=id).first() # filter is safer because if id doesnt exsit will return empty dictionary
     context = {
         "student": s
     }
