@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul class="nav justify-content-center">
+        <li class="nav-item">
+            <h4 class="nav-link">Welcome {{user.first_name}}</h4>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/dog/new">Create</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/logout">Logout!</a>
+        </li>
+    </ul>
+    <h2>Dogs made by user</h2>
+    <ul>
+      {% for d in dogs_by_user%}
+      <li>{{d.name}}</li>
+      {%endfor%}
+    </ul>
+
+    <div class="container pt-5">
+        <div class="row">
+    
+          <div class="col-md">
+            <h1 class="mb-3 text-center">Good Boys</h1>
+    
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Age</th>
+                  <th>Weight</th>
+                  <th>Birthday</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for good_boy in good_boyz %}
+                <tr>
+                  <td>{{ good_boy.name }}</td>
+                  <td>{{ good_boy.age }}</td>
+                  <td>{{ good_boy.weight }}</td>
+                  <td>{{ good_boy.birthday }}</td>
+                  <td>
+                    <a href="/dog/{{ good_boy.id }}/toggle_good_boy">Bad Boy!!</a>
+                    <br>
+                    <a href="/dog/{{ good_boy.id }}">Profile</a>
+                    <br>
+                  {% if good_boy.submitted_by.id == request.session.user_id %}
+                    <a href="">Edit</a><br>
+                    <a href="">Delete</a>
+                  {%endif%}
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+    
+          </div>
+    
+          <div class="col-md">
+            <h1 class="mb-3 text-center">Bad Boys</h1>
+    
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Age</th>
+                  <th>Weight</th>
+                  <th>Birthday</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for bad_boy in bad_boyz %}
+                <tr>
+                  <td>{{ bad_boy.name }}</td>
+                  <td>{{ bad_boy.age }}</td>
+                  <td>{{ bad_boy.weight }}</td>
+                  <td>{{ bad_boy.birthday }}</td>
+                  <td>
+                    <a href="/dog/{{ bad_boy.id }}/toggle_good_boy">
+                      Make a good boy
+                    </a>
+                    <br>
+                    <a href="/dogs/{{ bad_boy.id }}">Profile</a>
+                    <br>
+                    {% if bad_boy.submitted_by.id == request.session.user_id %}
+                      <a href="/dog/{{ bad_boy.id }}/edit">Edit</a><br>
+                      <a href="/dog/{{bad_boy.id}}/delete">Delete</a>
+                    {%endif%}
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+</body>
+
+</html>
