@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#">Welcome</a>
+        <a href="/logout">LOGOUT</a>
+      </nav>
+    <div class="container">
+        <div class="text-danger">
+            {%if messages%}
+            <ul class="list-unstyled d-inline-block">
+                {%for message in messages%}
+                <li class="text-left">
+                    {{ message }}
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        <form action="/addMessage" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Post a message</label>
+                <textarea class="form-control" rows="3" name="message"></textarea>
+            </div>
+            <button class="btn btn-info">Submit</button>
+        </form>
+        {% for m in all_messages %}
+        <div class="card mt-5">
+            <div class="card-header">
+              {{m.created_by.first_name}} {{m.created_by.last_name}} - {{m.created_at}}
+            </div>
+            <div class="card-body">
+              <p class="card-text">{{m.message}}</p>
+            </div>
+            {% for c in m.comments.all %}
+                <div class="card">
+                    <div class="card-header">
+                        {{c.created_by.first_name}} {{c.created_by.last_name}} - {{c.created_at}}
+                    </div>
+                    <div class="card-body">
+                    <p class="card-text">{{c.comment}}</p>
+                    </div>
+                </div>
+            {%endfor%}
+            <form action="/addComment/{{m.id}}" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Post a comment</label>
+                    <textarea class="form-control" rows="3" name="comment"></textarea>
+                </div>
+                <button class="btn btn-info">Comment</button>
+            </form>
+            </div>
+        {%endfor%}
+    </div>
+</body>
+</html>
